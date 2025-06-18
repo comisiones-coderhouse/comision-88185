@@ -1,0 +1,739 @@
+10 Ejercicios Básicos de React para PrincipiantesEstos ejercicios están diseñados para ayudarte a construir una base sólida en React, cubriendo conceptos esenciales como JSX, eventos, jerarquía de componentes, componentes React y estado. Cada ejercicio incluye una explicación detallada, un código inicial y comentarios extensivos para guiarte en tu implementación.
+
+
+Ejercicio 1: Crear tus Primeros ComponentesNivel de Dificultad: 1/5Conceptos Tocados: React Components, Component Hierarchy, JSXDescripción TeóricaEn React, una aplicación se construye a partir de pequeñas piezas reutilizables llamadas componentes. Piensa en ellos como funciones de JavaScript que devuelven elementos de React (que se parecen mucho al HTML, pero se llaman JSX).La jerarquía de componentes se refiere a cómo los componentes se anidan unos dentro de otros. Un componente "padre" puede renderizar uno o más componentes "hijos", formando una estructura de árbol. Esta es una forma poderosa de organizar tu interfaz de usuario y hacer que tu código sea modular y fácil de mantener.En este primer ejercicio, te daré el componente principal (App), y tu tarea será crear un nuevo componente simple y luego "anidarlo" dentro del componente App.Código Inicial// Importa React desde la librería 'react'. Esto es necesario para usar JSX y crear componentes.
+import React from 'react';
+// Importa ReactDOM para renderizar tu aplicación en el DOM del navegador.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente Principal: App
+// Este es el componente que usualmente actúa como el "contenedor" de toda tu aplicación.
+// Es un componente funcional, lo que significa que es una función de JavaScript.
+// ----------------------------------------------------
+function App() {
+  // El 'return' de un componente funcional debe contener el JSX que se renderizará.
+  return (
+    // <> y </> son "Fragmentos" de React. Permiten agrupar múltiples elementos JSX
+    // sin añadir un nodo extra al DOM (como un div, por ejemplo).
+    <>
+      {/* ¡Hola! Este es un párrafo de ejemplo dentro de tu componente App.
+        Aquí es donde vas a colocar tu nuevo componente que crearás a continuación.
+      */}
+      <p className="text-xl text-blue-600 mb-4 p-4 bg-blue-50 rounded-lg shadow-sm">
+        ¡Bienvenido a tu primer ejercicio de React!
+      </p>
+
+      {/* TODO: 
+        1. Crea un nuevo componente funcional llamado 'MiComponente' (o el nombre que prefieras)
+           justo debajo de este comentario, pero *fuera* de la función 'App'.
+        2. Dentro de 'MiComponente', retorna algún JSX simple, como un `<h1>` y un `<p>`.
+        3. Luego, ¡renderiza tu 'MiComponente' aquí mismo!
+           Simplemente escribe <MiComponente />
+      */}
+      {/* <MiComponente />  // Aquí es donde deberías renderizarlo */}
+
+      {/* Pista: Tu nuevo componente debería verse algo así (sin los comentarios):
+
+        function MiComponente() {
+          return (
+            <div>
+              <h1>Título de mi Componente</h1>
+              <p>Este es el contenido de mi nuevo componente.</p>
+            </div>
+          );
+        }
+      */}
+    </>
+  );
+}
+
+// ----------------------------------------------------
+// TODO: Crea tu nuevo componente aquí, fuera del componente App.
+//       Dale un nombre significativo y retorna algo de JSX.
+//       Por ejemplo:
+//
+//       function NombreDeTuComponente() {
+//         return (
+//           <div className="bg-green-100 p-4 rounded-lg mt-4 shadow-sm">
+//             <h2 className="text-lg font-semibold">Soy un nuevo componente</h2>
+//             <p className="text-gray-700">¡He sido creado y renderizado!</p>
+//           </div>
+//         );
+//       }
+// ----------------------------------------------------
+
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// Esta parte del código toma tu componente 'App' y lo inserta en el DOM del navegador.
+// No necesitas modificar esto para este ejercicio.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  // React.StrictMode es una herramienta para destacar problemas potenciales en una aplicación.
+  // No renderiza ninguna UI visible. Activa comprobaciones y advertencias adicionales para sus descendientes.
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+Tu TareaCrea un nuevo componente funcional (una función de JavaScript) con el nombre que desees (por ejemplo, MiComponente, TarjetaDeSaludo, etc.) fuera de la función App.Dentro de este nuevo componente, retorna algo de JSX simple (por ejemplo, un <div> con un <h1> y un <p>).Finalmente, "llama" a tu nuevo componente dentro del componente App escribiendo su nombre como si fuera una etiqueta HTML (por ejemplo, <MiComponente />).Ejercicio 2: Agregar Eventos a tu JSXNivel de Dificultad: 2/5Conceptos Tocados: Events, JSXDescripción TeóricaEn el desarrollo web, los eventos son acciones que ocurren en el navegador, como un usuario haciendo clic en un botón, escribiendo en un campo de texto o moviendo el ratón. React nos permite manejar estos eventos de una manera muy similar a HTML, pero con algunas diferencias clave:Los nombres de los eventos en React se escriben en camelCase (por ejemplo, onClick en lugar de onclick, onChange en lugar de onchange).Le pasas una función de JavaScript como manejador de eventos, en lugar de una cadena de texto.Cuando se produce un evento, React llama a la función que le proporcionaste. Dentro de esta función, puedes realizar la lógica que necesites, como cambiar el contenido de un elemento, realizar un cálculo, etc.En este ejercicio, agregarás onClick a un botón para cambiar un texto y onChange a un input para reaccionar a lo que el usuario escribe.Código Inicial// Importa React para poder usar JSX y los hooks como useState.
+import React, { useState } from 'react';
+// Importa ReactDOM para renderizar tu aplicación en el DOM.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente Interactivo
+// Este componente contendrá elementos HTML con los que el usuario interactuará.
+// ----------------------------------------------------
+function Interactivo() {
+  // Aquí declaramos una variable de estado para el mensaje que se mostrará.
+  // 'mensaje' es la variable que contiene el valor actual.
+  // 'setMensaje' es la función que usaremos para actualizar 'mensaje'.
+  // 'useState("Mensaje inicial")' inicializa 'mensaje' con ese valor.
+  const [mensaje, setMensaje] = useState("¡Haz clic en el botón!");
+
+  // TODO:
+  // 1. Define una función de manejador de eventos para el botón.
+  //    Esta función debería actualizar el 'mensaje' de estado a algo como "¡Botón clickeado!".
+  //    Por ejemplo:
+  //    const handleClick = () => {
+  //      setMensaje("¡Botón clickeado!");
+  //    };
+  //
+  // 2. Define otra función de manejador de eventos para el input.
+  //    Esta función recibirá un 'event' como argumento. Puedes acceder al valor del input
+  //    a través de 'event.target.value'.
+  //    Deberías imprimir este valor en la consola del navegador (console.log()).
+  //    Por ejemplo:
+  //    const handleInputChange = (event) => {
+  //      console.log("El valor del input es:", event.target.value);
+  //      // Opcional: podrías actualizar un estado con este valor para mostrarlo en la UI.
+  //    };
+
+  return (
+    <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-lg space-y-4">
+      <h1 className="text-2xl font-bold text-gray-800">Manejando Eventos</h1>
+
+      {/* TODO: 
+        Agrega un evento 'onClick' a este botón.
+        Asigna la función que definiste para el click del botón.
+      */}
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out"
+        // onClick={tuFuncionDeClick} // Aquí deberías asignar tu función
+      >
+        Haz Clic Aquí
+      </button>
+
+      {/* Este párrafo mostrará el mensaje que se actualiza.
+      */}
+      <p className="text-gray-700 text-lg mt-4">
+        Mensaje Actual: <span className="font-semibold text-purple-600">{mensaje}</span>
+      </p>
+
+      {/* TODO: 
+        Agrega un evento 'onChange' a este input.
+        Asigna la función que definiste para el cambio del input.
+      */}
+      <input
+        type="text"
+        placeholder="Escribe algo aquí..."
+        className="mt-4 p-2 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        // onChange={tuFuncionDeCambioDeInput} // Aquí deberías asignar tu función
+      />
+
+      <p className="text-sm text-gray-500 mt-2">
+        (Revisa la consola del navegador después de escribir en el input)
+      </p>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Interactivo />
+  </React.StrictMode>
+);
+Tu TareaCrea una función llamada handleClick (o un nombre similar) que, al ser llamada, cambie el valor del estado mensaje a "¡Botón clickeado!".Asigna esta función handleClick al evento onClick del <button> en el JSX.Crea otra función llamada handleInputChange (o similar) que reciba el objeto event como argumento. Dentro de esta función, imprime el valor actual del input en la consola del navegador (console.log(event.target.value)).Asigna esta función handleInputChange al evento onChange del <input> en el JSX.Ejercicio 3: Pasar Props a HijosNivel de Dificultad: 2/5Conceptos Tocados: Props, React Components, Component Hierarchy, JSXDescripción TeóricaProps (abreviatura de "propiedades") son la forma en que los datos fluyen en React: de un componente padre a un componente hijo. Piensa en ellos como los atributos que le das a una etiqueta HTML (como src en <img> o href en <a>), pero para tus propios componentes de React.Paso de Props: En el componente padre, le pasas props al componente hijo como si fueran atributos HTML.Ejemplo: <MiComponente nombre="Juan" edad={30} />Recepción de Props: En el componente hijo, recibes las props como un objeto, que es el primer argumento de tu función de componente.Ejemplo: function MiComponente(props) { console.log(props.nombre); }También puedes usar la desestructuración de objetos para acceder a las props directamente:function MiComponente({ nombre, edad }) { console.log(nombre); }Las props son inmutables en el componente hijo; es decir, un componente hijo nunca debe modificar las props que le fueron pasadas por su padre.En este ejercicio, un componente padre tendrá una variable. Tu tarea será pasar el valor de esa variable al componente hijo usando props y mostrarla en el hijo.Código Inicial// Importa React para poder usar JSX.
+import React from 'react';
+// Importa ReactDOM para renderizar tu aplicación en el DOM.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente Hijo: Saludo
+// Este componente es un componente funcional que espera recibir 'props'.
+// ----------------------------------------------------
+// TODO:
+// 1. Este componente 'Saludo' debería aceptar 'props' como su primer argumento.
+//    Por ejemplo: function Saludo(props) { ... } o function Saludo({ nombrePersona }) { ... }
+// 2. Dentro del JSX de este componente, usa la prop que le pasará el padre
+//    para mostrar un mensaje de saludo personalizado.
+//    Por ejemplo: <p>¡Hola, {props.nombrePersona}!</p>
+function Saludo() {
+  return (
+    <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white p-4 rounded-lg shadow-md mt-4">
+      {/* TODO: 
+        Aquí deberías mostrar el nombre que te pase el componente padre.
+        Por ahora, solo dice 'Mundo'. ¡Cámbialo para que use la prop!
+      */}
+      <p className="text-xl font-semibold">¡Hola, Mundo!</p>
+      <p className="text-sm">Este es un saludo genérico. ¡Hagámoslo personalizado!</p>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Componente Padre: App
+// Este componente tiene una variable y renderizará el componente 'Saludo'.
+// ----------------------------------------------------
+function App() {
+  // Aquí definimos una variable. Queremos pasar este valor al componente 'Saludo'.
+  const nombreUsuario = "React Learner";
+
+  return (
+    <div className="p-6 max-w-lg mx-auto bg-gray-50 rounded-xl shadow-lg space-y-4">
+      <h1 className="text-2xl font-bold text-gray-800 text-center">Pasando Props</h1>
+      <p className="text-gray-700 text-md text-center">
+        Aquí tenemos un nombre: <span className="font-semibold text-orange-600">{nombreUsuario}</span>
+      </p>
+
+      {/* TODO: 
+        1. Renderiza el componente 'Saludo' aquí.
+        2. Cuando lo renderices, pásale la variable 'nombreUsuario' como una prop.
+           El nombre de la prop puede ser 'nombrePersona' o el que elijas.
+           Ejemplo: <Saludo nombrePersona={nombreUsuario} />
+      */}
+      {/* <Saludo /> // Aquí es donde deberías renderizarlo y pasarle la prop */}
+
+      <p className="text-sm text-gray-500 mt-4 text-center">
+        El componente de arriba debería decir "¡Hola, React Learner!".
+      </p>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+Tu TareaModifica el componente Saludo para que acepte props como argumento.Dentro de Saludo, usa la desestructuración de objetos o props.nombreDeLaProp para acceder al nombre que se le pasará.Cambia el JSX dentro de Saludo para que muestre el nombre que recibe vía props (ej. <h1>¡Hola, {nombreRecibido}!</h1>).En el componente App, renderiza el componente Saludo.Al renderizar Saludo en App, pásale la variable nombreUsuario como una prop. Dale un nombre descriptivo a la prop, como nombrePersona (ej. <Saludo nombrePersona={nombreUsuario} />).Ejercicio 4: Manejo de Estado Básico: Contador SimpleNivel de Dificultad: 3/5Conceptos Tocados: State, React Components, Events, JSXDescripción TeóricaEl estado (state) es uno de los conceptos más importantes en React. Permite que tus componentes tengan datos que pueden cambiar con el tiempo y que, cuando cambian, React automáticamente vuelve a renderizar el componente para mostrar la información actualizada en la interfaz de usuario.En React, utilizamos el useState Hook para añadir estado a los componentes funcionales.useState devuelve un par de valores en un array:El valor actual del estado.Una función para actualizar ese estado.Cuando usas la función de actualización (por ejemplo, setContador(nuevoValor)), React sabe que el estado ha cambiado y programará una re-renderización del componente. ¡Nunca modifiques el estado directamente (ej. contador = contador + 1)! Siempre usa la función set proporcionada por useState.En este ejercicio, crearás un simple contador que incrementa su valor cada vez que se hace clic en un botón.Código Inicial// Importa React y el hook useState para manejar el estado.
+import React, { useState } from 'react';
+// Importa ReactDOM para renderizar la aplicación.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente Contador
+// Este componente tendrá un número que se actualizará.
+// ----------------------------------------------------
+function Contador() {
+  // TODO:
+  // 1. Declara una variable de estado llamada 'contador' e inicialízala en 0.
+  //    Usa la desestructuración de array para obtener la variable de estado y la función para actualizarla.
+  //    Pista: const [contador, setContador] = useState(0);
+
+  // TODO:
+  // 2. Define una función de manejador de eventos para el botón, por ejemplo, 'incrementarContador'.
+  //    Esta función debe actualizar el estado 'contador' sumándole 1.
+  //    Recuerda usar la función 'setContador'.
+  //    Pista: setContador(contador + 1);
+
+  return (
+    <div className="p-6 max-w-sm mx-auto bg-indigo-50 rounded-xl shadow-lg space-y-4 text-center">
+      <h1 className="text-2xl font-bold text-indigo-800">Contador Simple</h1>
+
+      <p className="text-5xl font-extrabold text-indigo-600 my-8">
+        {/* TODO: 
+          Aquí, muestra el valor actual de tu variable de estado 'contador'.
+        */}
+        0 {/* Por ahora, es un valor fijo. ¡Cámbialo para que muestre el estado! */}
+      </p>
+
+      {/* TODO: 
+        Asigna tu función 'incrementarContador' (o como la hayas llamado) 
+        al evento 'onClick' de este botón.
+      */}
+      <button 
+        className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+        // onClick={tuFuncionIncrementar} // Aquí deberías asignar tu función
+      >
+        Incrementar
+      </button>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Contador />
+  </React.StrictMode>
+);
+Tu TareaDentro del componente Contador, usa el useState Hook para crear una variable de estado llamada contador e inicialízala con el valor 0.Crea una función llamada incrementarContador que, cuando se llame, use la función de actualización del estado (setContador) para aumentar el valor de contador en 1.En el JSX, muestra el valor actual de contador en lugar del 0 fijo.Asigna la función incrementarContador al evento onClick del botón.Ejercicio 5: Abrir/Cerrar Popup (Alternar Visibilidad)Nivel de Dificultad: 3/5Conceptos Tocados: State, Events, Conditional RenderingDescripción TeóricaUna tarea común en las interfaces de usuario es mostrar u ocultar elementos, como ventanas emergentes (popups), menús desplegables o mensajes de advertencia. Esto se logra mediante el manejo del estado.Puedes usar una variable de estado booleana (true o false) para controlar si un elemento debe ser visible o no. Si el estado es true, renderizas el elemento; si es false, lo ocultas o no lo renderizas en absoluto.La forma más sencilla de hacer esto en JSX es usando la renderización condicional. Puedes usar el operador lógico && (AND) o el operador ternario (condicion ? valorSiVerdadero : valorSiFalso).En este ejercicio, usarás el estado para controlar la visibilidad de un simple popup.Código Inicial// Importa React y el hook useState.
+import React, { useState } from 'react';
+// Importa ReactDOM para renderizar la aplicación.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente Popup
+// Este componente manejará la visibilidad de un popup.
+// ----------------------------------------------------
+function PopupControl() {
+  // TODO:
+  // 1. Declara una variable de estado llamada 'mostrarPopup' e inicialízala en 'false'.
+  //    Esto significa que el popup estará oculto al principio.
+  //    Pista: const [mostrarPopup, setMostrarPopup] = useState(false);
+
+  // TODO:
+  // 2. Define una función de manejador de eventos para el botón, por ejemplo, 'alternarPopup'.
+  //    Esta función debe invertir el valor de 'mostrarPopup'. Si es 'true', lo hace 'false';
+  //    si es 'false', lo hace 'true'.
+  //    Pista: setMostrarPopup(!mostrarPopup);
+
+  return (
+    <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg space-y-4 text-center">
+      <h1 className="text-2xl font-bold text-gray-800">Control de Popup</h1>
+
+      {/* TODO: 
+        Asigna tu función 'alternarPopup' (o como la hayas llamado) 
+        al evento 'onClick' de este botón.
+      */}
+      <button 
+        className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out"
+        // onClick={tuFuncionAlternar} // Aquí deberías asignar tu función
+      >
+        {/* TODO: 
+          Cambia el texto del botón dinámicamente:
+          Si 'mostrarPopup' es true, el texto debe ser "Cerrar Popup".
+          Si 'mostrarPopup' es false, el texto debe ser "Abrir Popup".
+          Usa un operador ternario: {mostrarPopup ? "Cerrar Popup" : "Abrir Popup"}
+        */}
+        Abrir/Cerrar Popup {/* Por ahora, es un texto fijo. ¡Hazlo dinámico! */}
+      </button>
+
+      {/* TODO: 
+        Implementa la renderización condicional para el popup.
+        Si 'mostrarPopup' es true, renderiza el siguiente div.
+        Si 'mostrarPopup' es false, no lo renderices.
+        Usa el operador lógico &&: {mostrarPopup && ( ...tuDivPopup... )}
+      */}
+      {/*
+        {mostrarPopup && (
+          <div className="mt-6 p-5 bg-blue-100 border border-blue-300 rounded-lg shadow-inner">
+            <h2 className="text-xl font-semibold text-blue-800">¡Hola! Soy un Popup.</h2>
+            <p className="text-blue-700">Me abro y cierro usando el estado de React.</p>
+          </div>
+        )}
+      */}
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <PopupControl />
+  </React.StrictMode>
+);
+Tu TareaCrea una variable de estado booleana llamada mostrarPopup e inicialízala en false.Crea una función alternarPopup que invierta el valor de mostrarPopup cada vez que se llama.Asigna alternarPopup al onClick del botón.Usa la renderización condicional (&&) para mostrar u ocultar el div del popup basándose en el valor de mostrarPopup.Opcional: Haz que el texto del botón cambie entre "Abrir Popup" y "Cerrar Popup" según el estado de mostrarPopup.Ejercicio 6: Abrir/Cerrar Sidebar (Alternar Clases/Estilos)Nivel de Dificultad: 3/5Conceptos Tocados: State, Events, Styling (clases dinámicas)Descripción TeóricaEste ejercicio es muy similar al anterior, pero en lugar de renderizar condicionalmente un elemento, lo que haremos es cambiar dinámicamente sus clases CSS para alterar su apariencia o posición (como una barra lateral que se desliza).El concepto sigue siendo el mismo: usar una variable de estado booleana para decidir qué conjunto de clases CSS aplicar a un elemento. Si el estado es true, aplicas una clase (ej. sidebar-open); si es false, aplicas otra (ej. sidebar-closed).Esto se logra en JSX utilizando plantillas de cadena (template literals) para construir el atributo className de forma dinámica, o usando operadores ternarios para elegir la clase correcta.Código Inicial// Importa React y el hook useState.
+import React, { useState } from 'react';
+// Importa ReactDOM para renderizar la aplicación.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente Sidebar
+// Este componente controlará la visibilidad y estilo de una barra lateral.
+// ----------------------------------------------------
+function SidebarControl() {
+  // TODO:
+  // 1. Declara una variable de estado llamada 'sidebarAbierto' e inicialízala en 'false'.
+  //    Esto representará si la barra lateral está "abierta" o "cerrada".
+  //    Pista: const [sidebarAbierto, setSidebarAbierto] = useState(false);
+
+  // TODO:
+  // 2. Define una función de manejador de eventos para el botón, por ejemplo, 'alternarSidebar'.
+  //    Esta función debe invertir el valor de 'sidebarAbierto'.
+  //    Pista: setSidebarAbierto(!sidebarAbierto);
+
+  // Construye las clases CSS para el sidebar de forma dinámica
+  // Si sidebarAbierto es true, añade 'translate-x-0' (visible).
+  // Si sidebarAbierto es false, añade 'translate-x-full' (oculto a la derecha).
+  const sidebarClasses = `
+    fixed top-0 right-0 h-full w-64 bg-gray-800 text-white 
+    shadow-lg transform transition-transform duration-300 ease-in-out
+    ${/* TODO: 
+        Aquí, usa un operador ternario para añadir la clase correcta.
+        Si sidebarAbierto es true, usa 'translate-x-0'.
+        Si sidebarAbierto es false, usa 'translate-x-full'.
+    */''}
+    ${sidebarAbierto ? 'translate-x-0' : 'translate-x-full'} 
+  `;
+
+  return (
+    <div className="relative min-h-screen bg-gray-100 flex flex-col items-center p-6">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Control de Sidebar</h1>
+
+      {/* TODO: 
+        Asigna tu función 'alternarSidebar' (o como la hayas llamado) 
+        al evento 'onClick' de este botón.
+      */}
+      <button 
+        className="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 z-10"
+        // onClick={tuFuncionAlternarSidebar} // Aquí deberías asignar tu función
+      >
+        {/* TODO: 
+          Cambia el texto del botón dinámicamente:
+          Si 'sidebarAbierto' es true, el texto debe ser "Cerrar Sidebar".
+          Si 'sidebarAbierto' es false, el texto debe ser "Abrir Sidebar".
+        */}
+        Abrir/Cerrar Sidebar {/* Por ahora, es un texto fijo. ¡Hazlo dinámico! */}
+      </button>
+
+      {/* El Sidebar */}
+      <div className={sidebarClasses}>
+        <div className="p-6">
+          <h2 className="text-xl font-bold mb-4">Menú de Sidebar</h2>
+          <ul className="space-y-2">
+            <li><a href="#" className="block text-gray-300 hover:text-white">Opción 1</a></li>
+            <li><a href="#" className="block text-gray-300 hover:text-white">Opción 2</a></li>
+            <li><a href="#" className="block text-gray-300 hover:text-white">Opción 3</a></li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Overlay para cuando el sidebar está abierto (opcional, para cerrar al hacer clic fuera) */}
+      {/* TODO (Opcional): 
+        Si sidebarAbierto es true, muestra un div oscuro de fondo que también cierre el sidebar al hacer click.
+        Pista: {sidebarAbierto && <div onClick={alternarSidebar} className="fixed inset-0 bg-black opacity-50 z-0"></div>}
+      */}
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <SidebarControl />
+  </React.StrictMode>
+);
+Tu TareaCrea una variable de estado booleana llamada sidebarAbierto e inicialízala en false.Crea una función alternarSidebar que invierta el valor de sidebarAbierto cada vez que se llama.Asigna alternarSidebar al onClick del botón.Completa la construcción de la cadena sidebarClasses usando un operador ternario para aplicar la clase translate-x-0 cuando sidebarAbierto es true y translate-x-full cuando es false.Opcional: Haz que el texto del botón cambie entre "Abrir Sidebar" y "Cerrar Sidebar".Opcional: Agrega un overlay oscuro que aparezca cuando el sidebar está abierto y que lo cierre al hacer clic en él.Ejercicio 7: Entrada de Texto Controlada (Input)Nivel de Dificultad: 3/5Conceptos Tocados: State, Events (onChange), Forms (básico)Descripción TeóricaEn HTML, los elementos de formulario como <input>, <textarea>, y <select> mantienen su propio estado interno. Sin embargo, en React, es común hacer que estos elementos sean "componentes controlados".Un componente controlado significa que el valor del elemento del formulario es manejado por el estado de React. Esto se logra conectando el atributo value del input a una variable de estado y actualizando esa variable de estado con la función onChange del input.De esta manera, el estado de React es la "única fuente de verdad" para el valor del input, lo que te da un control completo sobre cómo se manejan los datos del formulario.En este ejercicio, harás que un campo de entrada de texto sea un componente controlado, y el texto que escribas se reflejará instantáneamente en un párrafo.Código Inicial// Importa React y el hook useState.
+import React, { useState } from 'react';
+// Importa ReactDOM para renderizar la aplicación.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente InputControlado
+// Este componente manejará un campo de texto controlado.
+// ----------------------------------------------------
+function InputControlado() {
+  // TODO:
+  // 1. Declara una variable de estado llamada 'textoInput' e inicialízala como una cadena vacía ''.
+  //    Esta variable almacenará lo que el usuario escribe en el input.
+  //    Pista: const [textoInput, setTextoInput] = useState('');
+
+  // TODO:
+  // 2. Define una función de manejador de eventos para el input, por ejemplo, 'handleInputChange'.
+  //    Esta función recibirá el objeto 'event'.
+  //    Dentro de la función, usa 'event.target.value' para obtener el texto actual del input
+  //    y úsalo para actualizar el estado 'textoInput'.
+  //    Pista: setTextoInput(event.target.value);
+
+  return (
+    <div className="p-6 max-w-md mx-auto bg-yellow-50 rounded-xl shadow-lg space-y-4">
+      <h1 className="text-2xl font-bold text-yellow-800 text-center">Entrada de Texto Controlada</h1>
+
+      {/* TODO: 
+        1. Asigna tu variable de estado 'textoInput' al atributo 'value' de este input.
+        2. Asigna tu función 'handleInputChange' (o como la hayas llamado) 
+           al evento 'onChange' de este input.
+      */}
+      <input
+        type="text"
+        placeholder="Empieza a escribir..."
+        className="mt-4 p-3 border border-yellow-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-yellow-400 text-lg"
+        // value={tuVariableDeEstado}  // Aquí asigna el valor del estado
+        // onChange={tuFuncionDeManejoDeCambio} // Aquí asigna la función de cambio
+      />
+
+      <p className="text-gray-700 text-xl mt-4">
+        Texto Actual: 
+        <span className="font-semibold text-green-600">
+          {/* TODO: 
+            Aquí, muestra el valor actual de tu variable de estado 'textoInput'.
+            Si no hay texto, puedes mostrar un mensaje predeterminado.
+          */}
+          {/* {textoInput === '' ? '...' : textoInput} */}
+          ... {/* Por ahora, es un valor fijo. ¡Hazlo dinámico! */}
+        </span>
+      </p>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <InputControlado />
+  </React.StrictMode>
+);
+Tu TareaCrea una variable de estado llamada textoInput e inicialízala como una cadena vacía.Crea una función handleInputChange que tome el event del onChange y actualice textoInput con el valor actual del input (event.target.value).Asigna textoInput al atributo value del <input>.Asigna handleInputChange al evento onChange del <input>.Muestra el valor de textoInput en el párrafo <p>.Ejercicio 8: Lista Dinámica de Elementos (Agregar)Nivel de Dificultad: 4/5Conceptos Tocados: State (arrays), Events, JSX (mapeo de arrays), Component Hierarchy (ítems de lista)Descripción TeóricaA menudo, querrás mostrar listas de elementos que cambian con el tiempo (por ejemplo, una lista de tareas, un carrito de compras). En React, esto se logra manteniendo la lista como un array en el estado y luego mapeando ese array a JSX para renderizar cada elemento.Cuando trabajas con arrays en el estado, es crucial recordar la inmutabilidad. Esto significa que nunca debes modificar un array existente directamente (ej. miArray.push(nuevoElemento)). En su lugar, siempre debes crear una nueva copia del array con los cambios deseados y luego usar la función set de useState para actualizar el estado con esta nueva copia. El operador de propagación (...) es muy útil para esto.Ejemplo: setMiArray([...miArray, nuevoElemento]);También, cuando renderizas listas en React, debes proporcionar una prop key única a cada elemento de la lista. Esto ayuda a React a identificar qué elementos han cambiado, se han añadido o se han eliminado, lo que mejora el rendimiento.Código Inicial// Importa React y el hook useState.
+import React, { useState } from 'react';
+// Importa ReactDOM para renderizar la aplicación.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente ListaDinamica
+// Este componente permitirá agregar elementos a una lista.
+// ----------------------------------------------------
+function ListaDinamica() {
+  // TODO:
+  // 1. Declara una variable de estado llamada 'nuevoItemTexto' e inicialízala como una cadena vacía ''.
+  //    Esto guardará el texto que el usuario escribe en el input para el nuevo elemento.
+  //    Pista: const [nuevoItemTexto, setNuevoItemTexto] = useState('');
+
+  // TODO:
+  // 2. Declara una variable de estado llamada 'itemsLista' e inicialízala como un array vacío [].
+  //    Aquí se almacenarán todos los elementos que el usuario agregue.
+  //    Pista: const [itemsLista, setItemsLista] = useState([]);
+
+  // TODO:
+  // 3. Define una función para manejar el cambio del input, por ejemplo, 'handleInputChange'.
+  //    Debe actualizar 'nuevoItemTexto' con el valor actual del input.
+  //    Pista: setNuevoItemTexto(event.target.value);
+
+  // TODO:
+  // 4. Define una función para manejar el clic del botón "Agregar", por ejemplo, 'handleAgregarItem'.
+  //    Dentro de esta función:
+  //    a. Asegúrate de que 'nuevoItemTexto' no esté vacío (ej. if (nuevoItemTexto.trim() === '') return;).
+  //    b. Crea un *nuevo* array que contenga todos los 'itemsLista' actuales
+  //       más el 'nuevoItemTexto'. Recuerda la inmutabilidad: [...itemsLista, nuevoItemTexto].
+  //    c. Actualiza el estado 'itemsLista' con este nuevo array.
+  //    d. Limpia el input después de agregar el elemento, estableciendo 'nuevoItemTexto' de nuevo a ''.
+  //    Pista: setItemsLista([...itemsLista, nuevoItemTexto]); setNuevoItemTexto('');
+
+  return (
+    <div className="p-6 max-w-md mx-auto bg-teal-50 rounded-xl shadow-lg space-y-6">
+      <h1 className="text-2xl font-bold text-teal-800 text-center">Lista de Compras</h1>
+
+      <div className="flex space-x-2">
+        {/* TODO: 
+          1. Asigna 'nuevoItemTexto' al atributo 'value' de este input.
+          2. Asigna tu función 'handleInputChange' al evento 'onChange' de este input.
+        */}
+        <input
+          type="text"
+          placeholder="Escribe un nuevo elemento..."
+          className="flex-grow p-3 border border-teal-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 text-lg"
+          // value={tuVariableDeEstadoInput}
+          // onChange={tuFuncionDeCambioInput}
+        />
+        {/* TODO: 
+          Asigna tu función 'handleAgregarItem' al evento 'onClick' de este botón.
+        */}
+        <button 
+          className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out"
+          // onClick={tuFuncionAgregar}
+        >
+          Agregar
+        </button>
+      </div>
+
+      <h2 className="text-xl font-semibold text-teal-700 mt-6">Elementos en la Lista:</h2>
+      <ul className="list-disc list-inside bg-white p-4 rounded-lg shadow-inner">
+        {/* TODO: 
+          Usa el método 'map' en tu array 'itemsLista' para renderizar cada elemento.
+          Por cada 'item' en 'itemsLista', retorna un '<li>'.
+          ¡No olvides la prop 'key' única para cada '<li>'! Puedes usar el 'item' mismo o su índice.
+          Ejemplo: {itemsLista.map((item, index) => (
+            <li key={index} className="py-1 text-gray-700">{item}</li>
+          ))}
+        */}
+        {/* Por ahora, la lista está vacía. ¡Rellénala dinámicamente! 
+        */}
+        {/* <li>Ejemplo de elemento (Quítame)</li> */}
+      </ul>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <ListaDinamica />
+  </React.StrictMode>
+);
+Tu TareaCrea una variable de estado nuevoItemTexto para el valor del input, inicializada en ''.Crea una variable de estado itemsLista para almacenar los elementos de la lista, inicializada en [].Implementa la función handleInputChange para actualizar nuevoItemTexto a medida que el usuario escribe.Implementa la función handleAgregarItem para:Verificar que nuevoItemTexto no esté vacío.Crear una nueva copia del array itemsLista que incluya el nuevoItemTexto al final.Actualizar el estado itemsLista con esta nueva copia.Limpiar el input estableciendo nuevoItemTexto de nuevo a ''.Conecta el value y onChange del <input> a nuevoItemTexto y handleInputChange.Conecta el onClick del botón "Agregar" a handleAgregarItem.Usa el método map en itemsLista para renderizar cada elemento como un <li> dentro de la <ul>. Asegúrate de añadir una key única a cada <li> (puedes usar el index por ahora).Ejercicio 9: Renderizado Condicional Simple (Mensajes de Bienvenida/Despedida)Nivel de Dificultad: 3/5Conceptos Tocados: Conditional Rendering, State, EventsDescripción TeóricaEl renderizado condicional en React te permite mostrar diferentes elementos o componentes basándose en ciertas condiciones. Esto es fundamental para construir interfaces de usuario dinámicas que se adapten a diferentes situaciones (por ejemplo, mostrar un mensaje de bienvenida si el usuario está logueado o un formulario de inicio de sesión si no lo está).Las formas más comunes de implementar renderizado condicional en JSX son:Operador if (fuera del return): Puedes usar sentencias if/else dentro de tu componente funcional para determinar qué JSX retornar.Operador Ternario (condition ? true : false): Ideal para cuando necesitas elegir entre dos bloques de JSX directamente dentro del return.Operador Lógico && (condition && JSX): Útil para renderizar un elemento solo si una condición es verdadera (si la condición es falsa, no se renderiza nada).En este ejercicio, usarás un estado booleano para alternar entre dos mensajes diferentes: uno de bienvenida y otro de despedida.Código Inicial// Importa React y el hook useState.
+import React, { useState } from 'react';
+// Importa ReactDOM para renderizar la aplicación.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente MensajeDinamico
+// Este componente mostrará diferentes mensajes según el estado.
+// ----------------------------------------------------
+function MensajeDinamico() {
+  // TODO:
+  // 1. Declara una variable de estado llamada 'esBienvenida' e inicialízala en 'true'.
+  //    Esto significa que al principio se mostrará el mensaje de bienvenida.
+  //    Pista: const [esBienvenida, setEsBienvenida] = useState(true);
+
+  // TODO:
+  // 2. Define una función de manejador de eventos para el botón, por ejemplo, 'alternarMensaje'.
+  //    Esta función debe invertir el valor de 'esBienvenida'.
+  //    Pista: setEsBienvenida(!esBienvenida);
+
+  return (
+    <div className="p-6 max-w-md mx-auto bg-orange-50 rounded-xl shadow-lg space-y-4 text-center">
+      <h1 className="text-2xl font-bold text-orange-800">Mensajes Condicionales</h1>
+
+      {/* TODO: 
+        Asigna tu función 'alternarMensaje' (o como la hayas llamado) 
+        al evento 'onClick' de este botón.
+      */}
+      <button 
+        className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out"
+        // onClick={tuFuncionAlternar} // Aquí deberías asignar tu función
+      >
+        Alternar Mensaje
+      </button>
+
+      <div className="mt-6 p-5 bg-white border border-orange-200 rounded-lg shadow-inner">
+        {/* TODO: 
+          Usa el operador ternario para mostrar un mensaje u otro.
+          Si 'esBienvenida' es true, muestra "¡Bienvenido a nuestra app!".
+          Si 'esBienvenida' es false, muestra "¡Hasta luego! Vuelve pronto.".
+          Ejemplo: {esBienvenida ? (
+            <p className="text-xl font-semibold text-green-700">¡Bienvenido a nuestra app!</p>
+          ) : (
+            <p className="text-xl font-semibold text-red-700">¡Hasta luego! Vuelve pronto.</p>
+          )}
+        */}
+        <p className="text-xl font-semibold text-gray-700">
+          Este mensaje cambiará... {/* ¡Cámbialo para que muestre los mensajes condicionales! */}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <MensajeDinamico />
+  </React.StrictMode>
+);
+Tu TareaCrea una variable de estado booleana llamada esBienvenida e inicialízala en true.Crea una función alternarMensaje que invierta el valor de esBienvenida al hacer clic en el botón.Asigna alternarMensaje al onClick del botón.Dentro del div principal, usa el operador ternario para mostrar uno de los dos mensajes:"¡Bienvenido a nuestra app!" si esBienvenida es true."¡Hasta luego! Vuelve pronto." si esBienvenida es false.Ejercicio 10: Componente de Tarjeta Reutilizable (Props)Nivel de Dificultad: 4/5Conceptos Tocados: Props, React Components, Component Hierarchy, JSXDescripción TeóricaUno de los mayores beneficios de React es la capacidad de crear componentes reutilizables. Esto significa que puedes definir un componente una vez y luego usarlo muchas veces en diferentes partes de tu aplicación, pasándole datos diferentes a través de sus props.Piensa en un componente como un "molde" o una "plantilla". Las props son los ingredientes o los detalles específicos que le das a ese molde para que cada instancia sea única pero siga la misma estructura básica.En este ejercicio, crearás un componente Tarjeta que mostrará un título y una descripción. Luego, en tu componente App principal, renderizarás varias instancias de esta Tarjeta, cada una con un título y una descripción diferentes, demostrando el poder de la reutilización con props.Código Inicial// Importa React.
+import React from 'react';
+// Importa ReactDOM para renderizar la aplicación.
+import ReactDOM from 'react-dom/client';
+
+// ----------------------------------------------------
+// Componente Tarjeta
+// Este componente debe ser reutilizable y mostrará datos que recibe por props.
+// ----------------------------------------------------
+// TODO:
+// 1. Modifica este componente para que acepte 'props' (por ejemplo, { titulo, descripcion }).
+// 2. Usa estas props para mostrar el título y la descripción dentro del JSX de la tarjeta.
+function Tarjeta() {
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+      <h3 className="text-xl font-bold text-gray-800 mb-2">
+        Título de Ejemplo {/* TODO: Reemplázame con la prop 'titulo' */}
+      </h3>
+      <p className="text-gray-600">
+        Esta es una descripción de ejemplo para la tarjeta. {/* TODO: Reemplázame con la prop 'descripcion' */}
+      </p>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Componente Principal: App
+// Aquí renderizaremos múltiples instancias del componente Tarjeta.
+// ----------------------------------------------------
+function App() {
+  return (
+    <div className="p-8 bg-gradient-to-br from-blue-100 to-purple-100 min-h-screen flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-extrabold text-gray-900 mb-10 text-center">
+        Colección de Tarjetas Reutilizables
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl">
+        {/* TODO: 
+          1. Renderiza 3 o 4 instancias del componente 'Tarjeta' aquí.
+          2. A cada instancia, pásale diferentes valores para las props 'titulo' y 'descripcion'.
+             Ejemplo:
+             <Tarjeta titulo="Mi Primera Tarjeta" descripcion="Contenido único para la tarjeta uno." />
+             <Tarjeta titulo="Otra Tarjeta Diferente" descripcion="Aquí va otra descripción." />
+        */}
+        {/* <Tarjeta /> // Renderiza tus tarjetas aquí y pásales props */}
+        
+      </div>
+      <p className="text-sm text-gray-600 mt-10">
+        Cada tarjeta de arriba debería mostrar un título y una descripción diferentes.
+      </p>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// Renderizado de la aplicación
+// No necesitas modificar esta sección.
+// ----------------------------------------------------
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+Tu TareaModifica el componente Tarjeta para que acepte dos props: titulo y descripcion.Dentro del JSX de Tarjeta, usa estas props para mostrar el título y la descripción en los elementos <h3> y <p> correspondientes.En el componente App, dentro del div con la clase grid, renderiza al menos tres instancias del componente Tarjeta.Para cada Tarjeta que renderices, pásale diferentes valores para las props titulo y descripcion.
+
+
+
+
+
+
+https://drive.google.com/file/d/1fnPPtxSHewaYpRmlaa49cAtG2B13lZu8/view
+https://nextjs.org/learn/react-foundations/getting-started-with-react
+https://react.gg/visualized
+
+
+Para no olvidar : 
+
+- Ver tema entregas
+- 
