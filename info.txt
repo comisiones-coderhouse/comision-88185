@@ -733,7 +733,26 @@ https://nextjs.org/learn/react-foundations/getting-started-with-react
 https://react.gg/visualized
 
 
+Netlify o vercel : 
+
+
 Para no olvidar : 
 
-- Ver tema entregas
-- 
+- props + children
+- maps
+- hooks
+- estados
+- eventos*
+- promesas + fetch
+
+
+
+function soyUnHook(){}
+
+soyUnHook()
+
+
+- useState
+- useEffect
+- useRef
+- useContext
