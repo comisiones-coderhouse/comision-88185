@@ -1,4 +1,23 @@
 import { useState } from "react"
+import { Formulario } from "./Formulario"
+import { Usuarios } from "./Usuarios"
+
+
+
+
+//Destructuing :
+
+const nombres = ["Juan", "Maria", "Pedro"]
+/* const nombre1 = nombres[0]
+const nombre2 = nombres[1]
+const nombre3 = nombres[2] */
+
+
+//const [var1, .... , varN] = array
+const [nombre1, nombre2, nombre3] = nombres
+
+
+
 
 
 
@@ -6,29 +25,40 @@ import { useState } from "react"
 export function Main({ items, children }) {
 
     //Logica
-    //const [variable,setVariable] = useState(valorInicial)
-    const [mensaje, setMensaje] = useState("Cargando...")
+    //const [a,setA] = useState(valorInicial)
+    const [estado, setEstado] = useState("Hola")
 
-    console.log("🚀 ~ Main ~ mensaje:", mensaje)
+    //const resultadoDelHook = useState("Hola") //["Hola",fn(){}]
+    //const miEstado = resultadoDelHook[0] //"Hola"
+    //const fnParaActualizarElEstado = resultadoDelHook[1] //fn(){}
 
 
+
+    //Funciones
     const handleClick = () => {
-        //mensaje = "Otro Texto"
-        setMensaje("Otro Texto")
-        //console.log(mensaje)
+        setEstado("Otro Texto")
     }
+
+
 
 
     //Vista
     return (
         <main>
-            <h2>{mensaje}</h2>
-            <button onClick={handleClick}>click</button>
+            {/* <h2>{estado}</h2>
+
+            <button onClick={handleClick}>click</button> */}
+
+            {/* <button onClick={() => { console.log("click2") }}>click</button> */}
+
+
             {children}
-            {items.map((item, indice) => {
-                //Lo que se retorna de un mapeo se renderiza (osea, se ve en el navegador) y se le agrega un atributo llamado "key" obligatorio
+            {/* {items.map((item, indice) => {
                 return <div key={indice}>{item}</div>
-            })}
+            })} */}
+
+            {/* <Formulario /> */}
+            <Usuarios />
         </main>
     )
 }

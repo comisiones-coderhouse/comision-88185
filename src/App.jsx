@@ -12,14 +12,14 @@ export function App() {
     <>
       <Header name={nombre} age={edad} />
       <Main items={productos}>
-        <a href="https://www.google.com">Google</a>
+        {/* <a href="https://www.google.com">Google</a> */}
       </Main>
       {/* <Footer/> */}
-      <Footer>
+      {/* <Footer>
         <p>Otro texto</p>
         <p>Otro texto</p>
         <p>Otro texto</p>
-      </Footer>
+      </Footer> */}
     </>
   );
 }
