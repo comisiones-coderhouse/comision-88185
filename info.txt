@@ -778,6 +778,20 @@ links :
   /item/:id => ItemDetailContainer
 
 
+
+/public/productos.json
+      /electornicos.json
+
+fetch('/productos.json')
+.then(res => res.json())
+.then(console.log);
+
+fetch('/{categoryName}.json')
+.then(res => res.json())
+.then(console.log);
+
+
+
 fetch('https://dummyjson.com/products/category/' + categoryName)
 .then(res => res.json())
 .then(console.log);
