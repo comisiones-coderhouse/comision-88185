@@ -1,64 +1,40 @@
-import { useState } from "react"
-import { Formulario } from "./Formulario"
-import { Usuarios } from "./Usuarios"
-
-
-
-
-//Destructuing :
-
-const nombres = ["Juan", "Maria", "Pedro"]
-/* const nombre1 = nombres[0]
-const nombre2 = nombres[1]
-const nombre3 = nombres[2] */
-
-
-//const [var1, .... , varN] = array
-const [nombre1, nombre2, nombre3] = nombres
-
-
-
-
+import { Routes, Route } from "react-router-dom"
+import { Home } from "./Home"
+import { DetalleDeProducto } from "./DetalleDeProducto"
 
 
 //Inicio del componente
-export function Main({ items, children }) {
-
-    //Logica
-    //const [a,setA] = useState(valorInicial)
-    const [estado, setEstado] = useState("Hola")
-
-    //const resultadoDelHook = useState("Hola") //["Hola",fn(){}]
-    //const miEstado = resultadoDelHook[0] //"Hola"
-    //const fnParaActualizarElEstado = resultadoDelHook[1] //fn(){}
-
-
-
-    //Funciones
-    const handleClick = () => {
-        setEstado("Otro Texto")
-    }
-
-
-
+export function Main() {
 
     //Vista
     return (
-        <main>
-            {/* <h2>{estado}</h2>
+        <main className="main">
+            {/* <h2>Home</h2>
+            }
 
-            <button onClick={handleClick}>click</button> */}
+            {/* if(urlDelNavegador === "/") { return <h2>Home</h2> } */}
 
-            {/* <button onClick={() => { console.log("click2") }}>click</button> */}
+            {/* /producto/1 - /producto/2 - /producto/3 : /producto/:id*/}
+            <Routes>
+                <Route path="/" element={<Home />} />
+
+                <Route path="/about" element={<h2>About</h2>} />
+                <Route path="/contact" element={<h2>Contact</h2>} />
+
+                <Route path="/producto/:id" element={<DetalleDeProducto />} />
+
+                <Route path="/categoria/:categoria" element={<h2>Categoria</h2>} />
+
+                {/* 
+                
+                <Route path="/1" element={<h2>Contact</h2>} />
+                <Route path="/2" element={<h2>Contact</h2>} />
+                <Route path="/3" element={<h2>Contact</h2>} /> 
+                
+                */}
 
 
-            {children}
-            {/* {items.map((item, indice) => {
-                return <div key={indice}>{item}</div>
-            })} */}
-
-            {/* <Formulario /> */}
-            <Usuarios />
+            </Routes>
         </main>
     )
 }

@@ -12,17 +12,20 @@ export function Usuarios() {
     //useEffect(a,b)
     //useEffect(()=>{},[])
     useEffect(() => {
-
+        
         fetch("https://jsonplaceholder.typicode.com/users")
             .then((respuesta) => { return respuesta.json() })
             .then((usuarios) => {
                 setEstado(usuarios)
             })
 
+
     }, [])
 
 
-    
+
+
+
     //Funciones
 
 

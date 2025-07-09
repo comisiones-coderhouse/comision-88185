@@ -756,3 +756,28 @@ soyUnHook()
 - useEffect
 - useRef
 - useContext
+
+
+App 
+  - Navbar 
+    - CartWidget
+  
+  - ItemListContainer
+    - ItemList
+      - Item
+
+  - ItemDetailContainer
+    - ItemDetail
+
+  - Cart(?)
+
+links : 
+
+  /  => ItemListContainer
+  /category/:id => ItemListContainer
+  /item/:id => ItemDetailContainer
+
+
+fetch('https://dummyjson.com/products/category/' + categoryName)
+.then(res => res.json())
+.then(console.log);
