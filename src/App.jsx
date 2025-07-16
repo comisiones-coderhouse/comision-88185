@@ -7,14 +7,11 @@ export function App() {
   const nombre = 'Horacio'
   const edad = 36
   
-
   return (
     <>
-
       <Header name={nombre} age={edad} />
       <Main />
       <Footer />
-      
     </>
   );
 }

@@ -778,7 +778,6 @@ links :
   /item/:id => ItemDetailContainer
 
 
-
 /public/productos.json
       /electornicos.json
 
@@ -795,3 +794,34 @@ fetch('/{categoryName}.json')
 fetch('https://dummyjson.com/products/category/' + categoryName)
 .then(res => res.json())
 .then(console.log);
+
+
+- State Uplifting : Subir el estado de un componente hijo a un componente padre, o enviar props al revés.
+
+Implementacion : 
+
+1) Identificar quien es el componente padre y quien es el componente hijo.
+2) Crear una funcion en el componente padre
+3) Le envio la funcion del paso 2 al componente hijo por props
+4) Integrar la funcion recibida por props del paso 3 en un evento del componente hijo
+5) A la funcion que se manda a ejecutar del paso anterior, le paso los datos que necesito como parametro
+6) En el componente padre, donde esta la funcion original del paso 2, le declaro parametros
+7) Con esa informacion hago lo que quiero
+
+
+
+- Context API / contexto/Provider
+
+1) Crear un contexto 
+2) "Extraer" el componente Provider del contexto
+3) Crear un nuevo componente "envoltorio" del Provider. Este componente debe retornar al Provider.
+4) Configurar el prop "value" del Provider. Este prop le da el valor al contexto.
+5) Envuelvo la aplicacion en el componente envoltorio.
+
+------
+
+6) Ir a cualquier componente (hijo) e importar el hook useContext y tambien el contexto creado en el paso 1.
+7) El contexto como parametro del hook me da su valor actual.
+
+
+

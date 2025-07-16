@@ -1,6 +1,12 @@
+import { ShoppingCart } from "lucide-react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { CartContext } from "../providers/CartProvider";
 
 export function Nav() {
+
+    const resultado = useContext(CartContext)
+
     return (
         <nav className="nav">
 
@@ -17,7 +23,10 @@ export function Nav() {
             {/* <a href="/contact">Contact</a> */}
             {/* <Link to="/contact">Contact</Link> */}
             <NavLink to="/contact" className="link">Contact</NavLink>
-
+            <NavLink to="/cart">
+                <ShoppingCart />
+                {resultado.cantidad}
+            </NavLink>
         </nav >
     )
 }

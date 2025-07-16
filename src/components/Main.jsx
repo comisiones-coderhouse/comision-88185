@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import { Home } from "./Home"
 import { DetalleDeProducto } from "./DetalleDeProducto"
+import { Cart } from "./Cart"
 
 
 //Inicio del componente
@@ -25,6 +26,7 @@ export function Main() {
 
                 <Route path="/categoria/:categoria" element={<h2>Categoria</h2>} />
 
+                <Route path="/cart" element={<Cart />} />
                 {/* 
                 
                 <Route path="/1" element={<h2>Contact</h2>} />
