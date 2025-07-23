@@ -15,7 +15,7 @@ export function DetalleDeProducto() {
 
 
     return (
-        <div>
+        <section className="producto-detalle">
             <h2>Detalle del producto {resultado.id}</h2>
             <p>$100</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis sit provident ipsam sunt, rem officiis quis modi voluptatem facilis, doloremque eaque at dicta voluptatum delectus nisi itaque, recusandae id assumenda.</p>
@@ -23,6 +23,6 @@ export function DetalleDeProducto() {
                 <Plus />
                 Agregar al carrito
             </button>
-        </div>
+        </section>
     )
 }

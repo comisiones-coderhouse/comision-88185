@@ -14,7 +14,7 @@ export function CustomCartProvider({
 }) {
 
 
-    const [cantidad,setCantidad] = useState(0)
+    const [cantidad, setCantidad] = useState(0)
 
 
     //4)Este es el valor del contexto

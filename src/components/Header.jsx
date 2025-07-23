@@ -1,11 +1,16 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import { Nav } from "./Nav";
-import { Search } from "lucide-react";
+import { Bot, Search } from "lucide-react";
 
 export function Header({ name, age }) {
     return (
         <header className="header">
-            <h1 className="header__title">Bienvenido {name}</h1>
+            <NavLink to="/" className="link link_title">
+                <h1 className="header__title">
+                    <Bot />
+                    Horapp
+                </h1>
+            </NavLink>
 
             <Routes>
                 <Route path="/" element={
