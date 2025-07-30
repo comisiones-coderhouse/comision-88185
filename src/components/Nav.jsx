@@ -1,6 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CartContext } from "../providers/CartProvider";
 
 export function Nav() {
@@ -10,11 +10,9 @@ export function Nav() {
     return (
         <nav className="nav">
 
-            {/* <NavLink to="/" className="link">Home</NavLink> */}
-
             <NavLink to="/about" className="link">About</NavLink>
-            <NavLink to="/categoria/electronica" className="link">Electronica</NavLink>
-            <NavLink to="/categoria/juguetes" className="link">Juguetes</NavLink>
+            <NavLink to="/categoria/electronicos" className="link">Electronicos</NavLink>
+            <NavLink to="/categoria/bazar" className="link">Bazar</NavLink>
 
             <NavLink to="/contact" className="link">Contact</NavLink>
 
@@ -22,6 +20,7 @@ export function Nav() {
                 <ShoppingCart />
                 {resultado.cantidad}
             </NavLink>
+            
         </nav >
     )
 }

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
-import { Home } from "./Home"
-import { DetalleDeProducto } from "./DetalleDeProducto"
+import { ItemListContainer } from "./ItemListContainer"
+import { ItemDetailContainer } from "./ItemDetailContainer"
 import { Cart } from "./Cart"
 
 
@@ -10,16 +10,16 @@ export function Main() {
     //Vista
     return (
         <main className="main">
-           
+
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<ItemListContainer />} />
 
                 <Route path="/about" element={<h2>About</h2>} />
                 <Route path="/contact" element={<h2>Contact</h2>} />
 
-                <Route path="/producto/:id" element={<DetalleDeProducto />} />
+                <Route path="/producto/:id" element={<ItemDetailContainer />} />
 
-                <Route path="/categoria/:categoria" element={<h2>Categoria</h2>} />
+                <Route path="/categoria/:categoria" element={<ItemListContainer />} />
 
                 <Route path="/cart" element={<Cart />} />
 

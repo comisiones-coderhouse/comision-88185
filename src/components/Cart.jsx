@@ -17,6 +17,7 @@ export function Cart() {
             <CheckoutForm
                 onSendForm={handleSendForm}
             />
+            
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
 //1) Esta variable es el contexto
 export const CartContext = createContext();
@@ -13,29 +13,11 @@ export function CustomCartProvider({
     children
 }) {
 
-
-    const [cantidad, setCantidad] = useState(0)
-    const [carrito, setCarrito] = useState([])
-    const [precioTotal, setPrecioTotal] = useState(0)
-
-    const handleAgregarAlCarrito = (producto, cantidad) => {}
-
-    const handleEliminarDelCarrito = (id) => {}
-
-    const handleVaciarCarrito = () => {
-        setCarrito([])
-        setPrecioTotal(0)
-        setCantidad(0)
-    }
-
-
     //4)Este es el valor del contexto
     const elValorDelContexto = {
-        //cantidad : 0,
-        cantidad: cantidad,
+        cantidad: 0,
         precioTotal: 0,
-        carrito: [],
-        setCantidad: setCantidad
+        carrito: []
     }
 
 
